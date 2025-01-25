@@ -1,3 +1,95 @@
+OVERVIEW
+
+This script is created for users to be able to backup/restore application data in a more complete way. Supported devices must meet the following criteria: Android 8++arm64.
+
+Since I am from Taiwan, the version released is Traditional Chinese (CN system will automatically translate its own script into Simplified Chinese).
+Advantages
+
+    Data integrity: After changing the system, all the original data will be retained, no need to re-login or download additional data packages.
+    Support backup SSAID, perfect backup of LINE.
+    Supports backup of application privileges Can backup runtime privileges and ops privileges.
+    Easy to operate: Simple steps to back up the complete data of the application!
+    Less restriction: No restriction on machine type, cross Android version.
+    Powerful: Backup and restore split apk.
+    Many algorithms: Currently supported compression algorithms are tar (default)
+    zstd.
+    Fast speed: even with zstd compression algorithm, the rate is still fast (compared to titanium backup swift backup).
+    The script comes with tools integrity validation and compressed package validation.
+
+How to use
+
+Please read the following instructions carefully to minimize unnecessary problems.
+Recommended tool: MT Manager, if you use Termux, please do not use tsu.
+Please do not use tsu if you are using Termux. The following operations require ROOT!!!!
+
+    First extract the downloaded data backup script.zip to any directory, you can see the following files and a directory: generate application list.sh backup_settings.conf backup_applications.sh tools backup_custom_folder.sh terminate_script.sh WARNING! Both backup and restore must ensure the existence and integrity of the tools or the script will be invalidated or binary recall will fail.
+
+    Then run the GenerateAppList.sh script and wait for the end of the script output, then wait for the end of the prompt, it will generate an appList.txt in the current directory, which is all the third-party apps you have installed.
+
+    Now open the generated appList.txt and save it according to the prompts inside, then you have set up the software you need to backup.
+
+    Finally, find backup_settings.conf, open it and save it according to the prompts, then open backup_app.sh and wait for the backup to finish, it will generate a folder named with Backup_compression algorithm name in the current directory, which is your software backup. Keep this whole folder to other location, after brushing the machine to copy back to the phone, directly in the folder to find the restore backup.sh can restore all the backup data, the same reason, there is an appList.txt, the use of the same method with the 3rd step, do not need to restore the deletion can be, in addition to go into the folder of the backup folder to find a single application folder Backup script and restore script can be backed up separately. and restore script can be used to backup and restore the script alone.
+
+    script execution process please pay attention to the red word prompts any error, and use the restore script pay attention to the end of the restore whether the application exists ssaid, assuming that ssaid prompts the existence of ssaid, please restart immediately after the restoration of ssaid has been applied to ssaid, assuming ssaid restoration immediately after the opening of the application will lead to ssaid applied to the failure, because android will generate a new The ssaid is one of the judgments to determine whether the application has changed the environment and device, to keep the consistency can reduce the prompts such as logging in a different place or the need to log in again to verify the method.
+
+Additional instructions: How to recover The following are instructions for recovering the files in the folder?
+
+
+    Find appList.txt in the recovery folder, open it, edit the list, save it and exit.
+
+    Find restore backup.sh Give root and wait for the script to finish.
+
+    Regenerate app list.sh can be used to refresh the list in appList.txt Use it when you delete any apps in the list to backup, or when restore backup.sh prompts the list error.
+
+    terminate script.sh used when you suddenly want to terminate the script or accidental operation Similarly, there is a backup folder, because the script does not require background characteristics can not use conventional means of termination, so I wrote a separate script termination
+
+About how to update the script?
+
+    Currently there are three ways to update, there are the following ways
+    1. manually download the backup script zip uncompressed directly to the script of any directory (not including tools directory) of any place to execute any script can be updated, the script will be prompted
+    2. This backup of any script in the execution of the Internet to detect the version of the script, when the update will be prompted to download their own, according to the script prompts can be operated (conf update = 1 when in effect), the script Internet only for the purpose of checking for updates, without any illegal operation or the down loader!
+    3. will download the compressed package is not uncompressed directly in /storage/emulated/0/Download script automatically detect the update, and follow the prompts can operate
+    4. Download the script in the QQ group without unzipping the script will detect the update themselves.
+
+Feedback
+
+    If there is a problem during the use, please bring a screenshot and explain the problem in detail, build issues.
+    Coolan @落葉淒涼TEL
+    QQ Group 976613477
+    TG https://t.me/yawasau_script
+
+Q&A
+
+    Why is there a dex in a shell script?
+    The dex is used to realize purposes that are difficult to achieve with scripts, currently saaid backup recovery, backup recovery runtime permissions and oops permissions, downloading and accessing the GitHub api to check for script updates, listing the user application name and package name, and converting from traditional to simplified Chinese are all dex functions, thanks to Android-DataBackup by XayahSuSuSu!
+
+Frequently Asked Questions
+
+Q1：What should I do if the batch backup fails? A1：Exit the script, delete /data/backup_tools and backup again.
+
+Q2：What should I do if the batch restore fails? A2：Exit the script, follow the same operation as above. If it is still wrong, please create issues, I will help you troubleshoot the error.
+
+Q3：Can WeChat/QQQ backup & recover data perfectly? A3：Can't guarantee it, some people say it can't and some say it can, so there will be a prompt for backup. It is recommended to use your trusted backup software to back up WeChat/QQ once more to prevent losing important data.
+
+Q4：Why do some apps take a long time to backup? For example, King of Glory, PUBG, the original God, WeChat, QQ. A4: Because the data package with the software are backed up to you, for example, the original God data package 9GB +, of course, long enough to crack, recovery is the same reason, but also to decompress the data package!
+
+Q5:Script every backup is a new backup? A5;Scripts will be backed up when compared to the last backup SIZE size of the backup if there is a difference on the backup, otherwise ignore the backup to save time!
+
+Backing up scripts took me a lot of time and effort, if you think it's good, you can donate XD . (https://paypal.me/YAWAsau?country.x=TW&locale.x=zh_TW))
+Thanks for your contribution!
+
+    Stinky Batch Lao K (kmou424): Provide part of the idea with validation function
+    Chip Lao Fang (xiong's Lao Fang): provide automatic update script program
+    Fatty Lao Chen (雨季騷年)
+    XayahSuSuSu (XayahSuSuSu): provide App support, dex support
+
+Document Editor: Petit-Abba, YuKongA
+
+
+
+
+### Original Readme below
+
 # Backup_script 數據備份腳本
 [![Stars](https://img.shields.io/github/stars/YAWAsau/backup_script?label=stars)](https://github.com/YAWAsau)
 [![Download](https://img.shields.io/github/downloads/YAWAsau/backup_script/total)](https://github.com/YAWAsau/backup_script/releases)
